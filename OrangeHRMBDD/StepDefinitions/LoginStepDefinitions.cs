@@ -51,11 +51,11 @@ namespace OrangeHRMBDD.StepDefinitions
         [Then(@"I should the message as '([^']*)'")]
         public void ThenIShouldTheMessageAs(string expectedError)
         {
-            string actualError= AutomationHooks.driver.FindElement(By.Id("spanMessage")).Text.Trim();
-            Assert.That(actualError.Contains(expectedError),"Assertion on invalid error.");
+            string actualError = AutomationHooks.driver.FindElement(By.Id("spanMessage")).Text.Trim();
+            Assert.That(actualError.Contains(expectedError), "Assertion on invalid error.");
         }
 
-        
+
 
     }
 }
