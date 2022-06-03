@@ -66,6 +66,6 @@ namespace OrangeHRMBDD.StepDefinitions
             string tableData = AutomationHooks.driver.FindElement(By.Id("emgcontact_list")).Text;
             Console.WriteLine(tableData);
             Assert.That(tableData.Contains(_table.Rows[0]["contactname"])); //expect true
-        }
+        }   
     }
 }

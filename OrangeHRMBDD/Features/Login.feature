@@ -11,7 +11,7 @@ Scenario: Valid Credential
 	And I enter password as 'admin123'
 	And I click on login
 	Then I should get access to portal with url as 'https://opensource-demo.orangehrmlive.com/index.php/dashboard'
-
+	
 Scenario Outline: Invalid Credential
 	When I enter username as '<username>'
 	And I enter password as '<password>'
