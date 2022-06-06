@@ -13,14 +13,15 @@ namespace OrangeHRMBDD.Hooks
     [Binding]
     public class AutomationHooks
     {
-        public static IWebDriver driver;
+        public IWebDriver driver;
+        //public int count;
 
         [AfterScenario]
         public void AfterScenario()
         {
-            if(AutomationHooks.driver!=null)
+            if(driver!=null)
             {
-                AutomationHooks.driver.Quit();
+                driver.Quit();
             }
             
         }

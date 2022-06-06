@@ -11,24 +11,42 @@ namespace OrangeHRMBDD.StepDefinitions
     public class EmergencyContactsStepDefinitions
     {
         private static Table _table;
+        private AutomationHooks _hooks;
+
+        private MainPage _main;
+        private MyInfoPage _info;
+
+        public EmergencyContactsStepDefinitions(AutomationHooks hooks)
+        {
+            this._hooks = hooks;
+            //Console.WriteLine(_hooks.count);
+            InitPageObject();
+        }
+
+        public void InitPageObject()
+        {
+            //page object instantition 
+            _main = new MainPage(_hooks.driver);
+            _info = new MyInfoPage(_hooks.driver);
+        }
 
         [When(@"I click on My Info")]
         public void WhenIClickOnMyInfo()
         {
-            MainPage.ClickOnMyInfo();
+            _main.ClickOnMyInfo();
         }
 
         [When(@"I click on Emergency Contact")]
         public void WhenIClickOnEmergencyContact()
         {
             //  AutomationHooks.driver.FindElement(By.LinkText("Emergency Contacts")).Click();
-            AutomationHooks.driver.FindElement(By.XPath("//*[text()=\"Contacter en cas d'urgence\" or text()='Emergency Contacts']")).Click();
+            _hooks.driver.FindElement(By.XPath("//*[text()=\"Contacter en cas d'urgence\" or text()='Emergency Contacts']")).Click();
         }
 
         [When(@"I click add emergency contact")]
         public void WhenIClickAddEmergencyContact()
         {
-            AutomationHooks.driver.FindElement(By.Id("btnAddContact")).Click();   
+            _hooks.driver.FindElement(By.Id("btnAddContact")).Click();   
         }
 
         [When(@"I fill the form")]
@@ -48,24 +66,24 @@ namespace OrangeHRMBDD.StepDefinitions
             //string workTelephone = table.Rows[0]["worktelephone"];
             //string email=table.Rows[0]["email"];
 
-            AutomationHooks.driver.FindElement(By.Id("emgcontacts_name")).SendKeys(contactName);
-            AutomationHooks.driver.FindElement(By.Id("emgcontacts_relationship")).SendKeys(relationship);
-            AutomationHooks.driver.FindElement(By.Id("emgcontacts_homePhone")).SendKeys(homeTelephone);
-            AutomationHooks.driver.FindElement(By.Id("emgcontacts_mobilePhone")).SendKeys(mobile);
-            AutomationHooks.driver.FindElement(By.Id("emgcontacts_workPhone")).SendKeys(table.Rows[0]["worktelephone"]);
+            _hooks.driver.FindElement(By.Id("emgcontacts_name")).SendKeys(contactName);
+            _hooks.driver.FindElement(By.Id("emgcontacts_relationship")).SendKeys(relationship);
+            _hooks.driver.FindElement(By.Id("emgcontacts_homePhone")).SendKeys(homeTelephone);
+            _hooks.driver.FindElement(By.Id("emgcontacts_mobilePhone")).SendKeys(mobile);
+            _hooks.driver.FindElement(By.Id("emgcontacts_workPhone")).SendKeys(table.Rows[0]["worktelephone"]);
             
         }
 
         [When(@"I click on save")]
         public void WhenIClickOnSave()
         {
-            AutomationHooks.driver.FindElement(By.Id("btnSaveEContact")).Click();
+            _hooks.driver.FindElement(By.Id("btnSaveEContact")).Click();
         }
 
         [Then(@"I should get the added contact details in the assigned contact table")]
         public void ThenIShouldGetTheAddedContactNameInTheAssignedContactTable()
         {
-            string tableData = AutomationHooks.driver.FindElement(By.Id("emgcontact_list")).Text;
+            string tableData = _hooks.driver.FindElement(By.Id("emgcontact_list")).Text;
             Console.WriteLine(tableData);
             Assert.That(tableData.Contains(_table.Rows[0]["contactname"])); //expect true
         }   

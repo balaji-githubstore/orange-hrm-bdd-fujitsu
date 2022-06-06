@@ -9,15 +9,21 @@ namespace Fujitsu.OrangeHRMBDD.Pages
 {
     public class MainPage
     {
-        private static By myInfoLocator = By.XPath("//*[text()='Mes Infos' or text()='My Info']");
+        private By myInfoLocator = By.XPath("//*[text()='Mes Infos' or text()='My Info']");
+
+        private IWebDriver _driver;
+        public MainPage(IWebDriver driver)
+        {
+            _driver = driver;
+        }
         public string GetMainPageUrl()
         {
-            return AutomationHooks.driver.Url;
+            return _driver.Url;
         }
 
-        public static void ClickOnMyInfo()
+        public void ClickOnMyInfo()
         {
-            AutomationHooks.driver.FindElement(myInfoLocator).Click();
+            _driver.FindElement(myInfoLocator).Click();
         }
     }
 }

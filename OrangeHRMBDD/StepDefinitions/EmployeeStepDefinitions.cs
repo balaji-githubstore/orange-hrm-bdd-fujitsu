@@ -1,4 +1,6 @@
+using Fujitsu.OrangeHRMBDD.Pages;
 using Fujitsu.Utilities;
+using OrangeHRMBDD.Hooks;
 using System;
 using TechTalk.SpecFlow;
 
@@ -7,6 +9,20 @@ namespace OrangeHRMBDD.StepDefinitions
     [Binding]
     public class EmployeeStepDefinitions
     {
+        private AutomationHooks _hooks;
+        private MainPage _main;
+
+        public EmployeeStepDefinitions(AutomationHooks hooks)
+        {
+            this._hooks = hooks;
+            InitPageObject();
+        }
+        public void InitPageObject()
+        {
+            //page object instantition 
+            _main = new MainPage(_hooks.driver);W
+        }
+
         [Given(@"I have browser with application")]
         public void GivenIHaveBrowserWithApplication()
         {

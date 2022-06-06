@@ -11,29 +11,38 @@ using WebDriverManager.DriverConfigs.Impl;
 namespace OrangeHRMBDD.StepDefinitions
 {
     [Binding]
-    public class LoginStepDefinitions
+    public class LoginStepDefinitions 
     {
+        private AutomationHooks _hooks;
         private LoginPage _login;
         private MainPage _main;
 
-        [Scope(Feature = "Login")]
+        public LoginStepDefinitions(AutomationHooks hooks)
+        {
+            this._hooks = hooks;
+           // Console.WriteLine(hooks.count);
+            //hooks.count = hooks.count + 10;
+          //  Console.WriteLine(hooks.count);
+        }
+
+        //[Scope(Feature = "Login")]
         [Given(@"I have browser with orangehrm application")]
         public void GivenIHaveBrowserWithOrangehrmApplication()
         {
             new DriverManager().SetUpDriver(new ChromeConfig(), version: "99.0.4844.51");
-            AutomationHooks.driver = new ChromeDriver();
-            AutomationHooks.driver.Manage().Window.Maximize();
-            AutomationHooks.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-            AutomationHooks.driver.Navigate().GoToUrl("https://opensource-demo.orangehrmlive.com/");
-
+            _hooks.driver = new ChromeDriver();
+            _hooks.driver.Manage().Window.Maximize();
+            _hooks.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            _hooks.driver.Navigate().GoToUrl("https://opensource-demo.orangehrmlive.com/");
+           
             InitPageObject();
         }
 
         public void InitPageObject()
         {
             //page object instantition 
-            _login = new LoginPage();
-            _main = new MainPage();
+            _login = new LoginPage(_hooks.driver);
+            _main = new MainPage(_hooks.driver);
         }
 
         [When(@"I enter username as '([^']*)'")]

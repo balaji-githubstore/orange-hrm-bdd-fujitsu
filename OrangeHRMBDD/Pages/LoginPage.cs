@@ -15,28 +15,34 @@ namespace Fujitsu.OrangeHRMBDD.Pages
         private By _errorLocator = By.Id("spanMessage");
         private By _linkedinLocator = By.XPath("//*[contains(text(),'Link')]");
 
+        private IWebDriver _driver;
+        public LoginPage(IWebDriver driver)
+        {
+            this._driver = driver;
+        }
+
         public void EnterUsername(string username)
         {
-            AutomationHooks.driver.FindElement(_usernameLocator).SendKeys(username);
+            _driver.FindElement(_usernameLocator).SendKeys(username);
         }
 
         public void EnterPassword(string password)
         {
-            AutomationHooks.driver.FindElement(_passwordLocator).SendKeys(password);
+            _driver.FindElement(_passwordLocator).SendKeys(password);
         }
 
         public void ClickOnLogin()
         {
-            AutomationHooks.driver.FindElement(_loginLocator).Click();
+            _driver.FindElement(_loginLocator).Click();
         }
 
         public string GetErrorMessage()
         {
-            return AutomationHooks.driver.FindElement(_errorLocator).Text.Trim();
+            return _driver.FindElement(_errorLocator).Text.Trim();
         }
         public void ClickOnLinkedin()
         {
-            AutomationHooks.driver.FindElement(_linkedinLocator).Click();
+            _driver.FindElement(_linkedinLocator).Click();
         }
     }
 }
