@@ -12,7 +12,6 @@ Scenario Outline: Add Emergency Contact
 	And I click on login
 	And I click on My Info
 	And I click on Emergency Contact
-	And I enter mobile number as '78887'
 	And I click add emergency contact
 	And I fill the form
 		| contactname   | relationship   | hometelephone | mobile   | worktelephone | 

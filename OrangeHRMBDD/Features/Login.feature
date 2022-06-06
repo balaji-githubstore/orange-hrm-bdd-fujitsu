@@ -11,7 +11,6 @@ Feature: Login
 Scenario: Valid Credential
 	When I enter username as 'Admin'
 	And I enter password as 'admin123'
-	And I enter mobile number as '78887'
 	And I click on login
 	Then I should get access to portal with url as 'https://opensource-demo.orangehrmlive.com/index.php/dashboard'
 	

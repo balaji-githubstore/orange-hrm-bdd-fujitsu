@@ -141,9 +141,6 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("I click on Emergency Contact", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 15
- testRunner.And("I enter mobile number as \'78887\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 16
  testRunner.And("I click add emergency contact", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -158,13 +155,13 @@ this.ScenarioInitialize(scenarioInfo);
                             string.Format("{0}", homephone),
                             string.Format("{0}", mobile),
                             string.Format("{0}", workphone)});
-#line 17
+#line 16
  testRunner.And("I fill the form", ((string)(null)), table1, "And ");
 #line hidden
-#line 20
+#line 19
  testRunner.And("I click on save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 21
+#line 20
  testRunner.Then("I should get the added contact details in the assigned contact table", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

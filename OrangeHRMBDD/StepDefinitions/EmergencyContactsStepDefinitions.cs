@@ -1,3 +1,4 @@
+using Fujitsu.OrangeHRMBDD.Pages;
 using NUnit.Framework;
 using OrangeHRMBDD.Hooks;
 using System;
@@ -6,23 +7,15 @@ using TechTalk.SpecFlow;
 namespace OrangeHRMBDD.StepDefinitions
 {
     [Binding]
+    
     public class EmergencyContactsStepDefinitions
     {
         private static Table _table;
 
-        [Scope(Feature = "EmergencyContacts",Scenario = "Add Emergency Contact",Tag = "myinfo")]
-        [When(@"I enter mobile number as '([^']*)'")]
-        public void WhenIEnterMobileNumberAs(string p0)
-        {
-            //login time - mobile
-            //locator
-        }
-
         [When(@"I click on My Info")]
         public void WhenIClickOnMyInfo()
         {
-            //AutomationHooks.driver.FindElement(By.XPath("My Info")).Click();
-            AutomationHooks.driver.FindElement(By.XPath("//*[text()='Mes Infos' or text()='My Info']")).Click();
+            MainPage.ClickOnMyInfo();
         }
 
         [When(@"I click on Emergency Contact")]
