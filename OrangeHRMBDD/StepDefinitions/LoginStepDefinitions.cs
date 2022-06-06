@@ -13,7 +13,10 @@ namespace OrangeHRMBDD.StepDefinitions
     [Binding]
     public class LoginStepDefinitions
     {
-        [Scope(Feature ="Login")]
+        private LoginPage _login;
+        private MainPage _main;
+
+        [Scope(Feature = "Login")]
         [Given(@"I have browser with orangehrm application")]
         public void GivenIHaveBrowserWithOrangehrmApplication()
         {
@@ -22,41 +25,50 @@ namespace OrangeHRMBDD.StepDefinitions
             AutomationHooks.driver.Manage().Window.Maximize();
             AutomationHooks.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
             AutomationHooks.driver.Navigate().GoToUrl("https://opensource-demo.orangehrmlive.com/");
+
+            InitPageObject();
+        }
+
+        public void InitPageObject()
+        {
+            //page object instantition 
+            _login = new LoginPage();
+            _main = new MainPage();
         }
 
         [When(@"I enter username as '([^']*)'")]
         public void WhenIEnterUsernameAs(string username)
         {
-            LoginPage.EnterUsername(username);
+            _login.EnterUsername(username);
         }
 
         [When(@"I enter password as '([^']*)'")]
         public void WhenIEnterPasswordAs(string password)
         {
-            LoginPage.EnterPassword(password);
+            _login.EnterPassword(password);
         }
 
         [When(@"I click on login")]
         public void WhenIClickOnLogin()
         {
-            LoginPage.ClickOnLogin();
+            _login.ClickOnLogin();
         }
 
         [Then(@"I should get access to portal with url as '([^']*)'")]
         public void ThenIShouldGetAccessToPortalWithUrlAs(string expectedUrl)
         {
-            Assert.That(MainPage.GetMainPageUrl(), Is.EqualTo(expectedUrl));
+            Assert.That(_main.GetMainPageUrl(), Is.EqualTo(expectedUrl));
         }
 
 
         [Then(@"I should the message as '([^']*)'")]
         public void ThenIShouldTheMessageAs(string expectedError)
         {
-            string actualError = LoginPage.GetErrorMessage();
+            string actualError = _login.GetErrorMessage();
             Assert.That(actualError.Contains(expectedError), "Assertion on invalid error.");
         }
 
-  
+
 
     }
 }

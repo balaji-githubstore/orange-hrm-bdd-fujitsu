@@ -10,7 +10,7 @@ namespace Fujitsu.OrangeHRMBDD.Pages
     public class MainPage
     {
         private static By myInfoLocator = By.XPath("//*[text()='Mes Infos' or text()='My Info']");
-        public static string GetMainPageUrl()
+        public string GetMainPageUrl()
         {
             return AutomationHooks.driver.Url;
         }
