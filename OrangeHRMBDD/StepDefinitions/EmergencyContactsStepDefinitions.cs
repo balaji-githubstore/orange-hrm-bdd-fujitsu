@@ -10,6 +10,14 @@ namespace OrangeHRMBDD.StepDefinitions
     {
         private static Table _table;
 
+        [Scope(Feature = "EmergencyContacts",Scenario = "Add Emergency Contact",Tag = "myinfo")]
+        [When(@"I enter mobile number as '([^']*)'")]
+        public void WhenIEnterMobileNumberAs(string p0)
+        {
+            //login time - mobile
+            //locator
+        }
+
         [When(@"I click on My Info")]
         public void WhenIClickOnMyInfo()
         {
@@ -45,6 +53,7 @@ namespace OrangeHRMBDD.StepDefinitions
             string homeTelephone= table.Rows[0]["hometelephone"];
             string mobile= table.Rows[0]["mobile"];
             //string workTelephone = table.Rows[0]["worktelephone"];
+            //string email=table.Rows[0]["email"];
 
             AutomationHooks.driver.FindElement(By.Id("emgcontacts_name")).SendKeys(contactName);
             AutomationHooks.driver.FindElement(By.Id("emgcontacts_relationship")).SendKeys(relationship);

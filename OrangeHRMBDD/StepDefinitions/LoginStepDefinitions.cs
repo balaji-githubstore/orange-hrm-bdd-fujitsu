@@ -12,7 +12,7 @@ namespace OrangeHRMBDD.StepDefinitions
     [Binding]
     public class LoginStepDefinitions
     {
-
+        [Scope(Feature ="Login")]
         [Given(@"I have browser with orangehrm application")]
         public void GivenIHaveBrowserWithOrangehrmApplication()
         {
@@ -55,6 +55,13 @@ namespace OrangeHRMBDD.StepDefinitions
             Assert.That(actualError.Contains(expectedError), "Assertion on invalid error.");
         }
 
+        [Scope(Feature ="Login")]
+        [When(@"I enter mobile number as '([^']*)'")]
+        public void WhenIEnterMobileNumberAs(string p0)
+        {
+            //login time - mobile
+            //locator
+        }
 
 
     }
