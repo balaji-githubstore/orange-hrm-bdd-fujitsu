@@ -10,7 +10,6 @@ namespace OrangeHRMBDD.StepDefinitions
     
     public class EmergencyContactsStepDefinitions 
     {
-        private static Table _table;
         private AutomationHooks _hooks;
         private ScenarioContext _scenarioContext;
         private MainPage _main;
@@ -54,7 +53,8 @@ namespace OrangeHRMBDD.StepDefinitions
         [When(@"I fill the form")]
         public void WhenIFillTheForm(Table table)
         {
-            _table = table;
+            _scenarioContext.Add("table", table);
+
             Console.WriteLine(table.Rows[0][0]);
             Console.WriteLine(table.Rows[0][1]);
             Console.WriteLine(table.Rows[0]["contactname"]);
@@ -93,11 +93,14 @@ namespace OrangeHRMBDD.StepDefinitions
             //{
             //    Console.WriteLine("no key avaialble");
             //}
+            if(_scenarioContext.TryGetValue("table",out Table table))
+            {
+                string tableData = _hooks.driver.FindElement(By.Id("emgcontact_list")).Text;
+                Console.WriteLine(tableData);
+                Assert.That(tableData.Contains(table.Rows[0]["contactname"])); //expect true
+            }
 
-
-            string tableData = _hooks.driver.FindElement(By.Id("emgcontact_list")).Text;
-            Console.WriteLine(tableData);
-            Assert.That(tableData.Contains(_table.Rows[0]["contactname"])); //expect true
+         
         }   
     }
 }
