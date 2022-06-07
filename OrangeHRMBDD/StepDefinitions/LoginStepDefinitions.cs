@@ -4,7 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 using OrangeHRMBDD.Hooks;
 using System;
-
+using TechTalk.SpecFlow.Infrastructure;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -15,16 +15,18 @@ namespace OrangeHRMBDD.StepDefinitions
     {
         private AutomationHooks _hooks;
         private ScenarioContext _scenarioContext;
+        private ISpecFlowOutputHelper helper;
         private LoginPage _login;
         private MainPage _main;
 
-        public LoginStepDefinitions(AutomationHooks hooks,ScenarioContext scenarioContext)
+        public LoginStepDefinitions(AutomationHooks hooks,ScenarioContext scenarioContext, ISpecFlowOutputHelper helper)
         {
             this._hooks = hooks;
             this._scenarioContext = scenarioContext;
-           // Console.WriteLine(hooks.count);
-           //hooks.count = hooks.count + 10;
-           //  Console.WriteLine(hooks.count);
+            this.helper = helper;
+            // Console.WriteLine(hooks.count);
+            //hooks.count = hooks.count + 10;
+            //  Console.WriteLine(hooks.count);
         }
 
         //[Scope(Feature = "Login")]
@@ -40,6 +42,7 @@ namespace OrangeHRMBDD.StepDefinitions
         {
             _hooks.LaunchBrowser(browser);
             InitPageObject();
+            helper.WriteLine("Page object initialized!!");
         }
 
 

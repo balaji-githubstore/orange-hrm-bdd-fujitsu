@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TechTalk.SpecFlow.Infrastructure;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -16,7 +17,18 @@ namespace OrangeHRMBDD.Hooks
     public class AutomationHooks
     {
         public IWebDriver driver;
+        private FeatureContext featureContext;
+        private ScenarioContext scenarioContext;
+        private ISpecFlowOutputHelper helper;
+
         //public int count;
+
+        public AutomationHooks(FeatureContext featureContext,ScenarioContext scenarioContext, ISpecFlowOutputHelper helper)
+        {
+            this.featureContext = featureContext;
+            this.scenarioContext = scenarioContext;
+            this.helper = helper;
+        }
 
         public void LaunchBrowser(string browser="ch")
         {
@@ -45,6 +57,16 @@ namespace OrangeHRMBDD.Hooks
         [AfterScenario]
         public void AfterScenario()
         {
+
+            Console.WriteLine(scenarioContext.ScenarioInfo.Title);
+
+            ITakesScreenshot ts = (ITakesScreenshot)driver;
+            Screenshot screenshot= ts.GetScreenshot();
+            screenshot.SaveAsFile("Image.png");
+
+            helper.WriteLine("completed " + scenarioContext.ScenarioInfo.Title);
+            helper.AddAttachment("Image.png");
+
             if (driver != null)
             {
                 driver.Quit();
