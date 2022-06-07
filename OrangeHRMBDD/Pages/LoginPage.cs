@@ -1,4 +1,5 @@
-﻿using OrangeHRMBDD.Hooks;
+﻿using Fujitsu.Hooks;
+using OrangeHRMBDD.Hooks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fujitsu.OrangeHRMBDD.Pages
 {
-    public class LoginPage
+    public class LoginPage : WebDriverKeywords
     {
         private By _usernameLocator = By.Id("txtUsername");
         private By _passwordLocator = By.CssSelector("#txtPassword");
@@ -16,24 +17,24 @@ namespace Fujitsu.OrangeHRMBDD.Pages
         private By _linkedinLocator = By.XPath("//*[contains(text(),'Link')]");
 
         private IWebDriver _driver;
-        public LoginPage(IWebDriver driver)
+        public LoginPage(IWebDriver driver):base(driver)
         {
             this._driver = driver;
         }
 
         public void EnterUsername(string username)
         {
-            _driver.FindElement(_usernameLocator).SendKeys(username);
+            EnterUsingLocator(_usernameLocator, username);
         }
 
         public void EnterPassword(string password)
         {
-            _driver.FindElement(_passwordLocator).SendKeys(password);
+            EnterUsingLocator(_passwordLocator, password);
         }
 
         public void ClickOnLogin()
         {
-            _driver.FindElement(_loginLocator).Click();
+            ClickUsingLocator(_loginLocator);
         }
 
         public string GetErrorMessage()
