@@ -5,7 +5,7 @@ Feature: Login
 	I want to access the portal 
 
 	Background: 
-	Given I have browser with orangehrm application
+	Given I have 'ff' browser with orangehrm application
 
 @high 	@valid
 Scenario: Valid Credential

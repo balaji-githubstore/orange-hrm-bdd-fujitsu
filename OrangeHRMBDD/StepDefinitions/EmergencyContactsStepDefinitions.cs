@@ -8,19 +8,21 @@ namespace OrangeHRMBDD.StepDefinitions
 {
     [Binding]
     
-    public class EmergencyContactsStepDefinitions
+    public class EmergencyContactsStepDefinitions 
     {
         private static Table _table;
         private AutomationHooks _hooks;
-
+        private ScenarioContext _scenarioContext;
         private MainPage _main;
         private MyInfoPage _info;
 
-        public EmergencyContactsStepDefinitions(AutomationHooks hooks)
+        public EmergencyContactsStepDefinitions(AutomationHooks hooks, ScenarioContext scenarioContext)
         {
             this._hooks = hooks;
+            this._scenarioContext = scenarioContext;
             //Console.WriteLine(_hooks.count);
             InitPageObject();
+
         }
 
         public void InitPageObject()
@@ -83,6 +85,16 @@ namespace OrangeHRMBDD.StepDefinitions
         [Then(@"I should get the added contact details in the assigned contact table")]
         public void ThenIShouldGetTheAddedContactNameInTheAssignedContactTable()
         {
+            //if(_scenarioContext.TryGetValue("username", out string value))
+            //{
+            //    Console.WriteLine(value);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("no key avaialble");
+            //}
+
+
             string tableData = _hooks.driver.FindElement(By.Id("emgcontact_list")).Text;
             Console.WriteLine(tableData);
             Assert.That(tableData.Contains(_table.Rows[0]["contactname"])); //expect true

@@ -14,29 +14,34 @@ namespace OrangeHRMBDD.StepDefinitions
     public class LoginStepDefinitions 
     {
         private AutomationHooks _hooks;
+        private ScenarioContext _scenarioContext;
         private LoginPage _login;
         private MainPage _main;
 
-        public LoginStepDefinitions(AutomationHooks hooks)
+        public LoginStepDefinitions(AutomationHooks hooks,ScenarioContext scenarioContext)
         {
             this._hooks = hooks;
+            this._scenarioContext = scenarioContext;
            // Console.WriteLine(hooks.count);
-            //hooks.count = hooks.count + 10;
-          //  Console.WriteLine(hooks.count);
+           //hooks.count = hooks.count + 10;
+           //  Console.WriteLine(hooks.count);
         }
 
         //[Scope(Feature = "Login")]
         [Given(@"I have browser with orangehrm application")]
         public void GivenIHaveBrowserWithOrangehrmApplication()
         {
-            new DriverManager().SetUpDriver(new ChromeConfig(), version: "99.0.4844.51");
-            _hooks.driver = new ChromeDriver();
-            _hooks.driver.Manage().Window.Maximize();
-            _hooks.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
-            _hooks.driver.Navigate().GoToUrl("https://opensource-demo.orangehrmlive.com/");
-           
+
+            _hooks.LaunchBrowser();
             InitPageObject();
         }
+        [Given(@"I have '([^']*)' browser with orangehrm application")]
+        public void GivenIHaveBrowserWithOrangehrmApplication(string browser)
+        {
+            _hooks.LaunchBrowser(browser);
+            InitPageObject();
+        }
+
 
         public void InitPageObject()
         {
@@ -48,6 +53,7 @@ namespace OrangeHRMBDD.StepDefinitions
         [When(@"I enter username as '([^']*)'")]
         public void WhenIEnterUsernameAs(string username)
         {
+            //_scenarioContext.Add("username", username);
             _login.EnterUsername(username);
         }
 

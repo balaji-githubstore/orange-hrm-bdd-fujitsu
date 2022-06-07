@@ -82,7 +82,6 @@ namespace OrangeHRMBDD.Features
         [NUnit.Framework.CategoryAttribute("emergencycontact")]
         [NUnit.Framework.CategoryAttribute("high")]
         [NUnit.Framework.TestCaseAttribute("Admin", "admin123", "Sathish", "Brother", "4554", "5553", "454554", null)]
-        [NUnit.Framework.TestCaseAttribute("Admin", "admin123", "Paul", "Father", "45541", "55531", "4545541", null)]
         public virtual void AddEmergencyContact(string username, string password, string contactname, string relationship, string homephone, string mobile, string workphone, string[] exampleTags)
         {
             string[] @__tags = new string[] {

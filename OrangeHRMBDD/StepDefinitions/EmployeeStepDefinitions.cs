@@ -20,7 +20,7 @@ namespace OrangeHRMBDD.StepDefinitions
         public void InitPageObject()
         {
             //page object instantition 
-            _main = new MainPage(_hooks.driver);W
+            _main = new MainPage(_hooks.driver);
         }
 
         [Given(@"I have browser with application")]

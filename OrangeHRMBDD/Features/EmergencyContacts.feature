@@ -21,5 +21,5 @@ Scenario Outline: Add Emergency Contact
 Examples:
 	| username | password | contactname | relationship | homephone | mobile | workphone |
 	| Admin    | admin123 | Sathish     | Brother      | 4554      | 5553   | 454554    |
-	| Admin    | admin123 | Paul        | Father       | 45541     | 55531  | 4545541   |
+	#| Admin    | admin123 | Paul        | Father       | 45541     | 55531  | 4545541   |
 
