@@ -1,0 +1,24 @@
+﻿MSBuild dir 
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin
+
+
+Add the path to environment varaible - 
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin
+
+To build the project 
+msbuild -t:clean;restore;Rebuild OrangeHRMBDD.csproj
+
+
+VS-TestConsole.exe
+C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\TestWindow
+
+
+
+List the scenario 
+vstest.console OrangeHRMBDD\bin\Debug\net6.0\OrangeHRMBDD.dll /ListTests
+
+TO run sepecific scenario 
+vstest.console OrangeHRMBDD\bin\Debug\net6.0\OrangeHRMBDD.dll /Tests:ScenarioName
+
+To Run all scenario 
+>vstest.console OrangeHRMBDD\bin\Debug\net6.0\OrangeHRMBDD.dll
